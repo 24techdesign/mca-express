@@ -1,0 +1,16 @@
+{
+  "name": "MCA Express LLC",
+  "short_name": "MCA Express",
+  "description": "Professional trucking and freight transportation services",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1565C0",
+  "icons": [
+    {
+      "src": "/logo.webp",
+      "sizes": "192x192",
+      "type": "image/webp"
+    }
+  ]
+}
