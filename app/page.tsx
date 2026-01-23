@@ -486,10 +486,10 @@ export default function Home() {
                   <div>
                     <p className="text-sm text-gray-500">Call Us</p>
                     <a
-                      href="tel:+1234567890"
+                      href="tel:+13139998888"
                       className="text-lg font-semibold text-gray-900 hover:text-primary transition-colors"
                     >
-                      (123) 456-7890
+                      (313) 999-8888
                     </a>
                   </div>
                 </div>
