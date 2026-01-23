@@ -1,0 +1,22 @@
+name: Claude Auto-Fix
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  claude-fix:
+    if: github.event.label.name == 'content-update'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: "Please resolve issue #${{ github.event.issue.number }} and open a PR."
