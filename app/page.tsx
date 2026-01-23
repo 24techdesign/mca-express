@@ -501,10 +501,10 @@ export default function Home() {
                   <div>
                     <p className="text-sm text-gray-500">Email Us</p>
                     <a
-                      href="mailto:info@mcaexpress.com"
+                      href="mailto:admin@mcaexpressgroup.com"
                       className="text-lg font-semibold text-gray-900 hover:text-primary transition-colors"
                     >
-                      info@mcaexpress.com
+                      admin@mcaexpressgroup.com
                     </a>
                   </div>
                 </div>
