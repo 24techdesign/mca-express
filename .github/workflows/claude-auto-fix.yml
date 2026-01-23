@@ -20,4 +20,9 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          prompt: "Please resolve issue #${{ github.event.issue.number }} and open a PR."
+          claude_args: "--dangerously-skip-permissions"
+          prompt: |
+            Please resolve issue #${{ github.event.issue.number }}.
+            You have full permission to use gh, git, and pnpm.
+            Follow the verification steps in CLAUDE.md.
+            Create a PR when done.
