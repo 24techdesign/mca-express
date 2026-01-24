@@ -2,11 +2,10 @@ name: Claude Auto-Fix
 
 on:
   issues:
-    types: [labeled]
+    types: [opened]
 
 jobs:
   claude-fix:
-    if: github.event.label.name == 'content-update'
     runs-on: ubuntu-latest
     permissions:
       contents: write
