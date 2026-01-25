@@ -201,7 +201,7 @@ export default function Home() {
                   href="#contact"
                   className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-all hover:scale-105"
                 >
-                  Get a Quote
+                  Apply Now
                   <ChevronRight className="ml-2 h-5 w-5" />
                 </a>
                 <a
@@ -470,12 +470,12 @@ export default function Home() {
                 Get In Touch
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-6">
-                Ready to Ship?
+                Join Our Team
               </h2>
               <p className="text-gray-600 mb-8 leading-relaxed">
-                Contact us today to discuss your freight needs. We offer
-                competitive rates and reliable service for all your
-                transportation requirements.
+                Looking for experienced drivers to join the MCA Express family.
+                We offer competitive pay, modern equipment, and great benefits.
+                Apply today to start your career with us.
               </p>
 
               <div className="space-y-6">
@@ -531,78 +531,78 @@ export default function Home() {
             >
               <form className="bg-white p-8 rounded-2xl shadow-lg">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                  Request a Quote
+                  Submit Your Application
                 </h3>
                 <div className="space-y-5">
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Name
+                        Full Name
                       </label>
                       <input
                         type="text"
                         className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                        placeholder="Your name"
+                        placeholder="John Smith"
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone
+                        Phone Number
                       </label>
                       <input
                         type="tel"
                         className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                        placeholder="Your phone"
+                        placeholder="(555) 123-4567"
                       />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Email
+                      Email Address
                     </label>
                     <input
                       type="email"
                       className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                      placeholder="your@email.com"
+                      placeholder="your.email@example.com"
                     />
                   </div>
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Pickup Location
+                        Position Applying For
                       </label>
                       <input
                         type="text"
                         className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                        placeholder="City, State"
+                        placeholder="e.g., CDL Driver, Dispatcher"
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Delivery Location
+                        Years of Experience
                       </label>
                       <input
                         type="text"
                         className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                        placeholder="City, State"
+                        placeholder="e.g., 5 years"
                       />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Message
+                      Qualifications & Experience
                     </label>
                     <textarea
                       rows={4}
                       className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
-                      placeholder="Tell us about your freight..."
+                      placeholder="Tell us about your qualifications, CDL class, endorsements, work history, etc."
                     />
                   </div>
                   <button
                     type="submit"
                     className="w-full bg-primary text-white py-4 rounded-lg font-semibold hover:bg-primary-dark transition-all hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    Submit Request
+                    Submit Application
                   </button>
                 </div>
               </form>
