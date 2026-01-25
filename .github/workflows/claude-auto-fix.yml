@@ -16,17 +16,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: "--dangerously-skip-permissions"
-          mcp_servers: |
-            {
-              "playwright": {
-                "command": "npx",
-                "args": ["-y", "@playwright/mcp@latest"]
-              }
-            }
+          claude_args: |
+            --dangerously-skip-permissions
+            --mcp-config '{"mcpServers": {"playwright": {"command": "npx", "args": ["-y", "@playwright/mcp@latest"]}}}'
           prompt: |
             Please resolve issue #${{ github.event.issue.number }}.
             You have full permission to use gh, git, and pnpm.
