@@ -17,6 +17,7 @@ import {
   Route,
   Award,
 } from "lucide-react";
+import { postNetlifyForm } from "@/lib/netlifyFormSubmit";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -34,6 +35,8 @@ const staggerContainer = {
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const services = [
     {
@@ -485,12 +488,20 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Call Us</p>
-                    <a
-                      href="tel:+13139998888"
-                      className="text-lg font-semibold text-gray-900 hover:text-primary transition-colors"
-                    >
-                      (313) 999-8888
-                    </a>
+                    <div className="space-y-1">
+                      <a
+                        href="tel:+13139005134"
+                        className="text-lg font-semibold text-gray-900 hover:text-primary transition-colors block"
+                      >
+                        (313) 900-5134
+                      </a>
+                      <a
+                        href="tel:+13137340406"
+                        className="text-lg font-semibold text-gray-900 hover:text-primary transition-colors block"
+                      >
+                        (313) 734-0406
+                      </a>
+                    </div>
                   </div>
                 </div>
 
@@ -500,12 +511,20 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Email Us</p>
-                    <a
-                      href="mailto:info@mcaexpress.com"
-                      className="text-lg font-semibold text-gray-900 hover:text-primary transition-colors"
-                    >
-                      info@mcaexpress.com
-                    </a>
+                    <div className="space-y-1">
+                      <a
+                        href="mailto:admin@mcaexpressgroup.com"
+                        className="text-lg font-semibold text-gray-900 hover:text-primary transition-colors block"
+                      >
+                        admin@mcaexpressgroup.com
+                      </a>
+                      <a
+                        href="mailto:safety@mcaexpressgroup.com"
+                        className="text-lg font-semibold text-gray-900 hover:text-primary transition-colors block"
+                      >
+                        safety@mcaexpressgroup.com
+                      </a>
+                    </div>
                   </div>
                 </div>
 
@@ -529,28 +548,77 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <form className="bg-white p-8 rounded-2xl shadow-lg">
+              <form
+                name="job-application"
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  if (isSubmitting) return;
+
+                  setIsSubmitting(true);
+
+                  try {
+                    const form = e.currentTarget as HTMLFormElement;
+                    const res = await postNetlifyForm(form);
+                    if (res.ok) {
+                      setSubmitSuccess(true);
+                      form.reset();
+                      setTimeout(() => setSubmitSuccess(false), 5000);
+                    } else {
+                      form.submit();
+                    }
+                  } catch (err) {
+                    console.error('Form submit error:', err);
+                    e.currentTarget.submit();
+                  } finally {
+                    setIsSubmitting(false);
+                  }
+                }}
+                className="bg-white p-8 rounded-2xl shadow-lg"
+              >
+                <input type="hidden" name="form-name" value="job-application" />
+                <div style={{ display: 'none' }}>
+                  <label>
+                    Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
+                  </label>
+                </div>
+
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">
                   Submit Your Application
                 </h3>
+
+                {submitSuccess && (
+                  <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-green-800 font-medium">
+                      Thank you! Your application has been submitted successfully. We&apos;ll be in touch soon.
+                    </p>
+                  </div>
+                )}
+
                 <div className="space-y-5">
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Full Name
+                        Full Name *
                       </label>
                       <input
                         type="text"
+                        name="name"
+                        required
                         className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                         placeholder="John Smith"
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone Number
+                        Phone Number *
                       </label>
                       <input
                         type="tel"
+                        name="phone"
+                        required
                         className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                         placeholder="(555) 123-4567"
                       />
@@ -558,10 +626,12 @@ export default function Home() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address
+                      Email Address *
                     </label>
                     <input
                       type="email"
+                      name="email"
+                      required
                       className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                       placeholder="your.email@example.com"
                     />
@@ -569,20 +639,24 @@ export default function Home() {
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Position Applying For
+                        Position Applying For *
                       </label>
                       <input
                         type="text"
+                        name="position"
+                        required
                         className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                         placeholder="e.g., CDL Driver, Dispatcher"
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Years of Experience
+                        Years of Experience *
                       </label>
                       <input
                         type="text"
+                        name="experience"
+                        required
                         className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                         placeholder="e.g., 5 years"
                       />
@@ -590,9 +664,11 @@ export default function Home() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Qualifications & Experience
+                      Qualifications & Experience *
                     </label>
                     <textarea
+                      name="qualifications"
+                      required
                       rows={4}
                       className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
                       placeholder="Tell us about your qualifications, CDL class, endorsements, work history, etc."
@@ -600,9 +676,10 @@ export default function Home() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-primary text-white py-4 rounded-lg font-semibold hover:bg-primary-dark transition-all hover:scale-[1.02] active:scale-[0.98]"
+                    disabled={isSubmitting}
+                    className="w-full bg-primary text-white py-4 rounded-lg font-semibold hover:bg-primary-dark transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Submit Application
+                    {isSubmitting ? 'Submitting...' : 'Submit Application'}
                   </button>
                 </div>
               </form>
