@@ -12,7 +12,7 @@ export async function postNetlifyForm(form: HTMLFormElement): Promise<Response> 
   const params = new URLSearchParams();
   for (const [key, value] of fd.entries()) params.append(key, String(value));
 
-  return fetch('/', {
+  return fetch('/__forms.html', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: params.toString(),

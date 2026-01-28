@@ -4,9 +4,3 @@
 
 [build.environment]
   NODE_VERSION = "22"
-
-# Form submissions configuration
-[[forms]]
-  name = "job-application"
-  [forms.settings]
-    subject = "New Job Application - MCA Express"
